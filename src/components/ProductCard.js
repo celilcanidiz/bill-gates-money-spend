@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {Card , Button, Col} from 'react-bootstrap';
+import {Card , Button,} from 'react-bootstrap';
 import NumberFormat from 'react-number-format';
-import {updateCount} from "../src/redux/products/productsSlice";
+import {updateCount} from "../redux/products/productsSlice";
 
 
 function ProductCard({id}) {
   const items = useSelector(state => state.product.items);
   const money = useSelector(state => state.product.money);
-  const initialMoney=useSelector(state => state.product.initialMoney);
+  
   
   const item = items.find((tmp) => tmp.id === id);
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ function ProductCard({id}) {
     dispatch(updateCount({id:item.id, count:count}))
     
     control();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   useEffect(() => {
@@ -32,6 +33,7 @@ function ProductCard({id}) {
     if(item.productPrice<=money ){
       setisBuyable(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [money]);
   
   
@@ -46,7 +48,7 @@ function ProductCard({id}) {
     if(count > 0){
       setisSellable(false);
     }
-    if(count == 0){
+    if(count === 0){
       setisSellable(true);
     }
   }
@@ -58,7 +60,7 @@ function ProductCard({id}) {
     else if(value<0){
       setCount(0);
     }
-    else if(money ==0 && value<count){
+    else if(money === 0 && value<count){
       setCount(value);
     }
     else{

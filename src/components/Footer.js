@@ -4,12 +4,12 @@ import NumberFormat from 'react-number-format';
 import {Container, Row, Col} from 'react-bootstrap';
 function Footer() {
   const items = useSelector(state => state.product.items);
-  const money = useSelector(state => state.product.money);
   const filtered = items.filter((item) => item.count > 0);
   let spendMoney=0
-  filtered.map((item)=>{
-    spendMoney+=item.productPrice*item.count;
-  })
+  
+  filtered.map((item)=>(
+    spendMoney+=item.productPrice*item.count
+  ))
 
 
 
